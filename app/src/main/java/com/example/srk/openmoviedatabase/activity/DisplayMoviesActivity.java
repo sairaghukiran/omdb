@@ -1,14 +1,16 @@
 package com.example.srk.openmoviedatabase.activity;
 
-import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.srk.openmoviedatabase.R;
 import com.example.srk.openmoviedatabase.adapter.EndlessScrollListener;
@@ -16,10 +18,9 @@ import com.example.srk.openmoviedatabase.adapter.MoviesAdapter;
 import com.example.srk.openmoviedatabase.model.CompleteMoviesList;
 import com.example.srk.openmoviedatabase.model.Movie;
 import com.example.srk.openmoviedatabase.model.MoviesList;
-import com.example.srk.openmoviedatabase.retrofitapi.OnlineMoviewDBAPI;
+import com.example.srk.openmoviedatabase.retrofitapi.OnlineMovieDBAPI;
 import com.example.srk.openmoviedatabase.utils.ListUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,6 +52,16 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(scrollListener);
         searchBox = (EditText) findViewById(R.id.search_box);
+        searchBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_SEARCH) {
+                    performNewSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
         completeMoviesList = new CompleteMoviesList();
     }
 
@@ -70,10 +81,14 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scrollListener.resetState();
-                performSearch(1, true);
+                performNewSearch();
             }
         };
+    }
+
+    private void performNewSearch() {
+        scrollListener.resetState();
+        performSearch(1, true);
     }
 
     private void performSearch(int page, boolean newSearch) {
@@ -89,7 +104,7 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        OnlineMoviewDBAPI omdbApi = retrofit.create(OnlineMoviewDBAPI.class);
+        OnlineMovieDBAPI omdbApi = retrofit.create(OnlineMovieDBAPI.class);
 
         Call<MoviesList> retrofitCall = omdbApi.getMovies(searchTerm, page);
         retrofitCall.enqueue(DisplayMoviesActivity.this);
@@ -102,7 +117,7 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
 
     @Override
     public void onResponse(Call<MoviesList> call, Response<MoviesList> response) {
-        if(response.isSuccessful()) Log.i("Response: ", response.isSuccessful()?"Successful":"Not successful");
+        Log.i("Response: ", response.isSuccessful()?"Successful":"Not successful");
         MoviesList moviesList = response.body();
         if(moviesList != null && moviesList.getMovies()!= null) {
             List<Movie> moviesInCurrentPage = moviesList.getMovies();
