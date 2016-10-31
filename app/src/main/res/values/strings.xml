@@ -2,4 +2,5 @@
     <string name="app_name">Open Movie Database</string>
     <string name="movies">Search</string>
     <string name="error_msg">Search failed. Please try another search.</string>
+    <string name="technical_error">Something went wrong. Please try later.</string>
 </resources>

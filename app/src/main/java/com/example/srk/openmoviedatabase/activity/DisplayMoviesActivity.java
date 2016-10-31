@@ -128,6 +128,6 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
     @Override
     public void onFailure(Call<MoviesList> call, Throwable t) {
         View rootView = findViewById(R.id.activity_display_movies);
-        Snackbar.make(rootView, R.string.error_msg, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(rootView, R.string.technical_error, Snackbar.LENGTH_LONG).show();
     }
 }
