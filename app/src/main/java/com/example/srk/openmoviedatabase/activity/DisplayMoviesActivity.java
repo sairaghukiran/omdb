@@ -108,8 +108,9 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
             List<Movie> moviesInCurrentPage = moviesList.getMovies();
             if(ListUtils.isEmpty(completeMoviesList.getCompleteMoviesList())) {
                 completeMoviesList.setCompleteMoviesList(moviesInCurrentPage);
+            } else {
+                completeMoviesList.getCompleteMoviesList().addAll(moviesInCurrentPage);
             }
-            completeMoviesList.getCompleteMoviesList().addAll(moviesInCurrentPage);
         }
         if(ListUtils.isEmpty(completeMoviesList.getCompleteMoviesList())) {
             View rootView = findViewById(R.id.activity_display_movies);
