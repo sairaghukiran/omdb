@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 public abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
 
     private int threshold = 3;
-    private int currentPage = 0;
+    private int currentPage = 1;
     private boolean loading = true;
     private int totalItemCount = 0;
 
@@ -33,14 +33,13 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
         }
 
         if(!loading && (lastVisibleItemPos + threshold) > itemCount) {
-            currentPage++;
             loading = true;
-            onLoadMore(currentPage, itemCount, recyclerView);
+            onLoadMore(++currentPage, itemCount, recyclerView);
         }
     }
 
     public void resetState() {
-        this.currentPage = 0;
+        this.currentPage = 1;
         this.totalItemCount = 0;
         this.loading = true;
     }

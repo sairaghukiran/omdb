@@ -17,15 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/search_box_edge_length"
-            android:hint="@string/movie" />
+            android:hint="@string/movies" />
 
         <ImageButton
             android:id="@+id/search_button"
             android:layout_width="@dimen/search_box_edge_length"
             android:layout_height="@dimen/search_box_edge_length"
             android:layout_gravity="end"
+            android:background="@android:color/transparent"
             android:src="@drawable/search_black"
-            android:contentDescription="@string/movie"/>
+            android:contentDescription="@string/movies"/>
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView

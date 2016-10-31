@@ -48,6 +48,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return moviesList.size();
     }
 
+    public void setMovies(List<Movie> moviesList) {
+        int previousItemCount = getItemCount();
+        this.moviesList = moviesList;
+        notifyItemRangeInserted(previousItemCount, 10);
+    }
+
     private class MovieViewHolder extends RecyclerView.ViewHolder {
         private TextView itemPosition;
         private TextView movieTitle;

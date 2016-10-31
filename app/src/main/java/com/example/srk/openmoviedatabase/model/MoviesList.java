@@ -13,13 +13,24 @@ public class MoviesList {
 
     @SerializedName("Search")
     @Expose
-    List<Movie> movie;
+    private List<Movie> movies;
 
-    public List<Movie> getMovie() {
-        return movie;
+    @SerializedName("totalResults")
+    private String totalResults;
+
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public void setMovie(List<Movie> movie) {
-        this.movie = movie;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public String getTotalResults() {
+        return totalResults;
+    }
+
+    public void setTotalResults(String totalResults) {
+        this.totalResults = totalResults;
     }
 }

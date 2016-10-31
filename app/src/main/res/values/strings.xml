@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Open Movie Database</string>
-
-    <string name="movie">Search</string>
+    <string name="movies">Search</string>
+    <string name="error_msg">Search failed. Please try another search.</string>
 </resources>

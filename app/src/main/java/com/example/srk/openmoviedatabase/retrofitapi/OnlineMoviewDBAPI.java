@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface OnlineMoviewDBAPI {
     @GET("?y=&plot=short&r=json")
-    Call<MoviesList> getMovies(@Query("s") String searchTerm);
+    Call<MoviesList> getMovies(@Query("s") String searchTerm, @Query("page") int page);
 }
