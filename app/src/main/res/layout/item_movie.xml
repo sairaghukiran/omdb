@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/material_margin_large"
+        android:layout_marginEnd="@dimen/material_margin_large"
+        android:layout_centerVertical="true"
+        tools:text="1"/>
+
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/position"
+        android:layout_marginTop="@dimen/material_margin_small"
+        tools:text="Batman"/>
+
+    <TextView
+        android:id="@+id/year_released"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/position"
+        android:layout_below="@+id/movie_title"
+        tools:text="1989"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/black"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
