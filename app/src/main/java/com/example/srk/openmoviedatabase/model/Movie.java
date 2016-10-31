@@ -32,4 +32,9 @@ public class Movie {
     public void setYear(String year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return title+"("+year+")";
+    }
 }
