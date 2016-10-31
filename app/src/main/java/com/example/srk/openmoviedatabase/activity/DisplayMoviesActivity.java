@@ -38,6 +38,7 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
     private EndlessScrollListener scrollListener;
 
     private static final String OMDB_BASE_URL = "http://www.omdbapi.com/";
+    private static final String SERIALIZABLE_KEY = "movies";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,22 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
             }
         });
         completeMoviesList = new CompleteMoviesList();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(SERIALIZABLE_KEY, completeMoviesList);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState!=null) {
+            completeMoviesList = (CompleteMoviesList) savedInstanceState.getSerializable(SERIALIZABLE_KEY);
+            setRecyclerAdapter();
+        }
     }
 
     class RecyclerEndlessScrollListener extends EndlessScrollListener {
@@ -132,8 +149,12 @@ public class DisplayMoviesActivity extends AppCompatActivity implements Callback
             Snackbar.make(rootView, R.string.error_msg, Snackbar.LENGTH_LONG).show();
             return;
         }
+        setRecyclerAdapter();
+    }
+
+    private void setRecyclerAdapter() {
         if(recyclerView.getAdapter() == null) {
-           moviesAdapter = new MoviesAdapter(completeMoviesList.getCompleteMoviesList());
+            moviesAdapter = new MoviesAdapter(completeMoviesList.getCompleteMoviesList());
             recyclerView.setAdapter(moviesAdapter);
         } else {
             moviesAdapter.setMovies(completeMoviesList.getCompleteMoviesList());
