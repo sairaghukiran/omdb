@@ -3,11 +3,15 @@ package com.example.srk.openmoviedatabase.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Raghu on 10/30/2016.
  */
 
-public class Movie {
+public class Movie implements Serializable {
+
+    private static final long serialVersionUID = 2785476355544736147L;
 
     @SerializedName("Title")
     @Expose
